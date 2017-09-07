@@ -1,0 +1,19 @@
+
+
+Current Challenge: [CHANGEME]
+=================================================
+[CHANGEME]
+
+
+Example
+=================================================
+If your program reads the input:
+[CHANGEME]
+It should output:
+[CHANGEME]
+
+
+Questions/Comments
+=================================================
+Please email: [CHANGEME]
+
