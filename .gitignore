@@ -1,3 +1,6 @@
 
+#custom configuration file
+www/config.php
+
 # compiled runner executable
 runner/runner
