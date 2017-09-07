@@ -1,0 +1,11 @@
+<?php
+
+$mysql_host	= "localhost";
+$mysql_user	= "[CHANGEME]";
+$mysql_pass	= "[CHANGEME]";
+$mysql_db	= "codegolf";
+
+$temp_dir	= "/tmp/";
+$runner		= "/usr/local/bin/runner";
+
+?>

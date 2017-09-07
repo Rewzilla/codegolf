@@ -1,11 +1,6 @@
 <?php
 
-// CONFIG
-$mysql_host = "localhost";
-$mysql_user = "[CHANGEME]";
-$mysql_pass = "[CHANGEME]";
-$mysql_db = "codegolf";
-// CONFIG
+include("config.php") or die("config.php not found");
 
 // output an error message
 function error($msg) {
@@ -79,7 +74,7 @@ if(!isset($_FILES["code"]))
 
 // create the temporary directory and move the code in
 // make sure it gets cleaned up if/when the script/program ends
-$tmpdir = "/tmp/" . tempname();
+$tmpdir = $temp_dir . tempname();
 register_shutdown_function("cleanup");
 mkdir($tmpdir);
 move_uploaded_file($_FILES["code"]["tmp_name"], $tmpdir . "/code.c");
@@ -102,7 +97,7 @@ $descspec = array(
 	1 => array("pipe", "w"),
 	2 => array("pipe", "w"),
 );
-$run = proc_open("/usr/local/bin/runner", $descspec, $pipes, $tmpdir);
+$run = proc_open($runner, $descspec, $pipes, $tmpdir);
 if(!is_resource($run))
 	error("Failed to run program");
 

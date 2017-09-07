@@ -6,5 +6,6 @@ C-codegolf competition platform
  * Make and install runner directory
  * Create mysql DB and build schema using schema.sql
  * Go through www directory and change everything marked [CHANGEME]
+ * Copy config.php.sample to config.php
  * Add 'runner' user with uid=1000
  * Run firewall.sh to lock down environment

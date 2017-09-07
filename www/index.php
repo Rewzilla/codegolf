@@ -2,13 +2,7 @@
 
 //die("Server is down for maintenance");
 
-// CONFIG
-$mysql_host = "localhost";
-$mysql_user = "[CHANGEME]";
-$mysql_pass = "[CHANGEME]";
-$mysql_db = "codegolf";
-// CONFIG
-
+include("config.php") or die("config.php not found");
 
 // connect to the DB
 $db = new mysqli($mysql_host, $mysql_user, $mysql_pass, $mysql_db);
