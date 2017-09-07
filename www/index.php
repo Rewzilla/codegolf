@@ -2,7 +2,7 @@
 
 //die("Server is down for maintenance");
 
-include("config.php") or die("config.php not found");
+include("config.php");
 
 // connect to the DB
 $db = new mysqli($mysql_host, $mysql_user, $mysql_pass, $mysql_db);
