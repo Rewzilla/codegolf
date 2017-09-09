@@ -1,7 +1,6 @@
 #!/bin/bash
 
 URL=[CHANGEME]/submit.php
-USER=`whoami`
 
 if [ $# -ne 1 ]; then
 	echo "Usage: $0 <file.c>"
@@ -11,9 +10,9 @@ elif [ ! -f $1 ]; then
 	exit 0;
 fi
 
-
+read -p "Username: " USER
 read -s -p "Password: " PASS
 echo ""
 
-curl $URL --user $USER:$PASS --form "code=@$1"
+curl "$URL" --user "$USER:$PASS" --form "code=@$1"
 
