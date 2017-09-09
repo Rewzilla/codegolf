@@ -1,6 +1,6 @@
 <?php
 
-include("config.php") or die("config.php not found");
+include("config.php");
 
 // output an error message
 function error($msg) {
