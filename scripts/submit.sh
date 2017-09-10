@@ -13,5 +13,5 @@ fi
 read -p "Username: " USER
 echo ""
 
-curl "$URL" --form "user=$USER&code=@$1"
+curl "$URL" --form "user=$USER" --form "code=@$1"
 
