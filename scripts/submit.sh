@@ -11,8 +11,7 @@ elif [ ! -f $1 ]; then
 fi
 
 read -p "Username: " USER
-read -s -p "Password: " PASS
 echo ""
 
-curl "$URL" --user "$USER:$PASS" --form "code=@$1"
+curl "$URL" --form "user=$USER&code=@$1"
 

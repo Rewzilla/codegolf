@@ -13,23 +13,11 @@ function error($msg) {
 // output a success message
 function success($score) {
 	global $db, $username;
-	$sql = $db->prepare("UPDATE users SET score=LEAST(?,score) WHERE username=?");
-	$sql->bind_param("is", $score, $username);
+	$sql = $db->prepare("REPLACE INTO users (username, score) VALUES (?, LEAST(?,score))");
+	$sql->bind_param("si", $username, $score);
 	$sql->execute();
 	$sql->close();
 	die("Success\ncode was " . $score . " bytes\n");
-}
-
-// check to see if $user:$pass is valid and return $user if so
-function get_user($user, $pass) {
-	global $db;
-	$sql = $db->prepare("SELECT username FROM users WHERE username=? AND password=?");
-	$sql->bind_param("ss", $user, md5($pass));
-	$sql->execute();
-	$sql->bind_result($username);
-	$sql->fetch();
-	$sql->close();
-	return $username;
 }
 
 // return a random testcase in the form...
@@ -60,13 +48,9 @@ $db = new mysqli($mysql_host, $mysql_user, $mysql_pass, $mysql_db);
 if(!$db)
 	error("Database error");
 
-// make sure the user supplied authentication
-if(!isset($_SERVER["PHP_AUTH_USER"]))
-	error("Authentication required");
-
-// check the authentication
-if(($username = get_user($_SERVER["PHP_AUTH_USER"], $_SERVER["PHP_AUTH_PW"])) == false)
-	error("Invalid username or password");
+// make sure the user supplied a username
+if(!isset($_POST["user"]))
+	error("Username required");
 
 // make sure the user supplied a code file
 if(!isset($_FILES["code"]))

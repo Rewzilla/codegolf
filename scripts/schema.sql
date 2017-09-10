@@ -49,9 +49,8 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(1024) DEFAULT NULL,
-  `password` varchar(1024) DEFAULT NULL,
   `score` int(11) DEFAULT '9999',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=144 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
