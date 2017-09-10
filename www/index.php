@@ -33,7 +33,7 @@ $place = 1;
 <body>
 	<div class="container">
 		<h1>CodeGolf Leaderboard</h1>
-		View the current challenge <a href="challenge.txt" target="_blank">here</a>
+		View the current challenge <a href="challenge.txt" target="_blank">here</a>.  Submit your code with <a href="golf.sh" target="_blank">this</a> script.
 		<hr/>
 		<table class="table table-striped table-bordered">
 			<tr><th>Place</th><th>Username</th><th>Best submission (bytes)</th></tr>
