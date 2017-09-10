@@ -11,11 +11,12 @@ function error($msg) {
 
 // save the score (maybe)
 // output a success message
-function success($score) {
-	global $db, $username;
-	$sql = $db->prepare("REPLACE INTO users (username, score) VALUES (?, LEAST(?,score))");
+function success($username, $score) {
+	global $db;
+	$sql = $db->prepare("REPLACE INTO users (username, score) VALUES (?, LEAST(?, score))");
 	$sql->bind_param("si", $username, $score);
 	$sql->execute();
+	echo mysqli_error($db);
 	$sql->close();
 	die("Success\ncode was " . $score . " bytes\n");
 }
@@ -102,4 +103,4 @@ if($result != $io["output"])
 	error("Incorrect solution");
 
 // tell the user they got it right!
-success(filesize($tmpdir . "/code.c"));
+success($_POST["user"], filesize($tmpdir . "/code.c"));
