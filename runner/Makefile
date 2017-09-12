@@ -1,6 +1,6 @@
 
 CC		= gcc
-CFLAGS	= -O3
+CFLAGS	= -O3 -lseccomp
 
 all:
 	$(CC) $(CFLAGS) -o runner runner.c
