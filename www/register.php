@@ -83,25 +83,25 @@ if(isset($_POST["submit"])) {
 <body>
 	<div class="container">
 		<h1>Register</h1>
-		<a href="register.php">Account Registration</a> | <a href="challenge.txt" target="_blank">Current Challenge</a> | <a href="golf.sh" target="_blank">Submission Script</a>
+		<a href="index.php">Leaderboard</a> | <a href="register.php">Account Registration</a> | <a href="challenge.txt" target="_blank">Current Challenge</a> | <a href="golf.sh" target="_blank">Submission Script</a>
 		<hr/>
 		<?php if(isset($_POST["submit"])) { ?>
 		<div class="alert alert-<?php echo $type; ?>" role="alert">
 			<?php echo $msg; ?>
 		</div>
 		<?php } ?>
-		<form>
+		<form method="POST">
 			<div class="form-group">
 				<label for="username">Username</label>
-				<input type="text" class="form-control" id="username" placeholder="NextGenHacker101">
+				<input type="text" class="form-control" id="username" name="username" placeholder="NextGenHacker101">
 			</div>
 			<div class="form-group">
 				<label for="password">Password</label>
-				<input type="password" class="form-control" id="password" placeholder="hunter2">
+				<input type="password" class="form-control" id="password" name="password" placeholder="hunter2">
 			</div>
 			<div class="form-group">
 				<label for="confirmpassword">Confirm Password</label>
-				<input type="password" class="form-control" id="confirmpassword" placeholder="hunter2">
+				<input type="password" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="hunter2">
 			</div>
 			<div class="form-group">
 				<div class="g-recaptcha" data-sitekey="<?php echo $recaptcha_sitekey; ?>"></div>

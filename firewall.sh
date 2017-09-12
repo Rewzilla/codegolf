@@ -37,11 +37,13 @@ echo "Allowing services"
 	echo " - dns       (OUT)"
 	iptables -A OUTPUT -p udp --dport 53 -m conntrack --ctstate NEW -j ACCEPT -m comment --comment "ACCEPT outgoing dns"
 
-	echo " - http      (IN)"
+	echo " - http      (IN/OUT)"
 	iptables -A INPUT -p tcp --dport 80 -m conntrack --ctstate NEW -j ACCEPT -m comment --comment "ACCEPT incoming http"
+	iptables -A OUTPUT -p tcp --dport 80 -m conntrack --ctstate NEW -j ACCEPT -m comment --comment "ACCEPT outgoing http"
 
-	echo " - https     (IN)"
+	echo " - https     (IN/OUT)"
 	iptables -A INPUT -p tcp --dport 443 -m conntrack --ctstate NEW -j ACCEPT -m comment --comment "ACCEPT incoming https"
+	iptables -A OUTPUT -p tcp --dport 443 -m conntrack --ctstate NEW -j ACCEPT -m comment --comment "ACCEPT outgoing https"
 
 echo "Gracefully rejecting everything else"
 iptables -A INPUT -p udp -j REJECT --reject-with icmp-port-unreachable -m comment --comment "Graceful UDP REJECTs"

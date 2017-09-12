@@ -34,7 +34,7 @@ $place = 1;
 <body>
 	<div class="container">
 		<h1>CodeGolf Leaderboard</h1>
-		<a href="register.php">Account Registration</a> | <a href="challenge.txt" target="_blank">Current Challenge</a> | <a href="golf.sh" target="_blank">Submission Script</a>
+		<a href="index.php">Leaderboard</a> | <a href="register.php">Account Registration</a> | <a href="challenge.txt" target="_blank">Current Challenge</a> | <a href="golf.sh" target="_blank">Submission Script</a>
 		<hr/>
 		<table class="table table-striped table-bordered">
 			<tr><th>Place</th><th>Username</th><th>Best submission (bytes)</th></tr>
