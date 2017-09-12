@@ -24,7 +24,6 @@ function user_exists($username) {
 	}
 }
 
-$msg = "";
 $type = "danger";
 if(isset($_POST["submit"])) {
 
@@ -86,7 +85,7 @@ if(isset($_POST["submit"])) {
 		<h1>Register</h1>
 		<a href="register.php">Account Registration</a> | <a href="challenge.txt" target="_blank">Current Challenge</a> | <a href="golf.sh" target="_blank">Submission Script</a>
 		<hr/>
-		<?php if(!empty($msg)) { ?>
+		<?php if(isset($_POST["submit"]) { ?>
 		<div class="alert alert-<?php echo $type; ?>" role="alert">
 			<?php echo $msg; ?>
 		</div>
@@ -107,7 +106,8 @@ if(isset($_POST["submit"])) {
 			<div class="form-group">
 				<div class="g-recaptcha" data-sitekey="<?php echo $recaptcha_sitekey; ?>"></div>
 			</div>
-			<button type="submit" class="btn btn-primary" name="submit">Submit</button>
+			<input type="hidden" name="submit" value="true">
+			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>
 	</div>
 </body>
