@@ -37,7 +37,7 @@ if(isset($_POST["submit"])) {
 
 		$msg = "Error: Invalid CAPTCHA";
 
-	} else if(empty($_POST["username"] || empty($_POST["password"]) || empty($_POST["confirmpassword"]) {
+	} else if(empty($_POST["username"]) || empty($_POST["password"]) || empty($_POST["confirmpassword"])) {
 
 		$msg = "Error: Required field(s) left blank";
 
