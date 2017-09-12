@@ -85,7 +85,7 @@ if(isset($_POST["submit"])) {
 		<h1>Register</h1>
 		<a href="register.php">Account Registration</a> | <a href="challenge.txt" target="_blank">Current Challenge</a> | <a href="golf.sh" target="_blank">Submission Script</a>
 		<hr/>
-		<?php if(isset($_POST["submit"]) { ?>
+		<?php if(isset($_POST["submit"])) { ?>
 		<div class="alert alert-<?php echo $type; ?>" role="alert">
 			<?php echo $msg; ?>
 		</div>
