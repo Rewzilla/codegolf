@@ -1,5 +1,8 @@
 <?php
 
+// maybe be in maintenance mode
+include("maintenance.php");
+
 include("config.php");
 
 // output an error message
@@ -7,18 +10,27 @@ function error($msg) {
 	die("Error\n" . $msg . "\n");
 }
 
-//error("Server is down for maintenance\n");
-
 // save the score (maybe)
 // output a success message
 function success($username, $score) {
 	global $db;
-	$sql = $db->prepare("REPLACE INTO users (username, score) VALUES (?, LEAST(?, score))");
+	$sql = $db->prepare("UPDATE users SET score=LEAST(?, score) WHERE username=?");
 	$sql->bind_param("si", $username, $score);
 	$sql->execute();
-	echo mysqli_error($db);
 	$sql->close();
 	die("Success\ncode was " . $score . " bytes\n");
+}
+
+// check to see if $user:$pass is valid and return $user if so
+function get_user($user, $pass) {
+	global $db;
+	$sql = $db->prepare("SELECT username FROM users WHERE username=? AND password=?");
+	$sql->bind_param("ss", $user, md5($pass));
+	$sql->execute();
+	$sql->bind_result($username);
+	$sql->fetch();
+	$sql->close();
+	return $username;
 }
 
 // return a random testcase in the form...
@@ -49,9 +61,13 @@ $db = new mysqli($mysql_host, $mysql_user, $mysql_pass, $mysql_db);
 if(!$db)
 	error("Database error");
 
-// make sure the user supplied a username
-if(!isset($_POST["user"]))
-	error("Username required");
+// make sure the user supplied authentication
+if(!isset($_SERVER["PHP_AUTH_USER"]))
+	error("Authentication required");
+
+// check the authentication
+if(($username = get_user($_SERVER["PHP_AUTH_USER"], $_SERVER["PHP_AUTH_PW"])) == false)
+	error("Invalid username or password");
 
 // make sure the user supplied a code file
 if(!isset($_FILES["code"]))

@@ -48,6 +48,7 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
   `username` varchar(64) DEFAULT NULL,
+  `password` varchar(32) DEFAULT NULL,
   `score` int(11) DEFAULT '9999',
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=144 DEFAULT CHARSET=latin1;

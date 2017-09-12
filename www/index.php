@@ -1,6 +1,7 @@
 <?php
 
-//die("Server is down for maintenance");
+// maybe be in maintenance mode
+include("maintenance.php");
 
 include("config.php");
 
@@ -33,7 +34,7 @@ $place = 1;
 <body>
 	<div class="container">
 		<h1>CodeGolf Leaderboard</h1>
-		View the current challenge <a href="challenge.txt" target="_blank">here</a>.  Submit your code with <a href="golf.sh" target="_blank">this</a> script.
+		<a href="register.php">Account Registration</a> | <a href="challenge.txt" target="_blank">Current Challenge</a> | <a href="golf.sh" target="_blank">Submission Script</a>
 		<hr/>
 		<table class="table table-striped table-bordered">
 			<tr><th>Place</th><th>Username</th><th>Best submission (bytes)</th></tr>
