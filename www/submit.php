@@ -1,8 +1,5 @@
 <?php
 
-// maybe be in maintenance mode
-include("maintenance.php");
-
 include("config.php");
 
 // output an error message
@@ -15,7 +12,7 @@ function error($msg) {
 function success($username, $score) {
 	global $db;
 	$sql = $db->prepare("UPDATE users SET score=LEAST(?, score) WHERE username=?");
-	$sql->bind_param("si", $username, $score);
+	$sql->bind_param("is", $score, $username);
 	$sql->execute();
 	$sql->close();
 	die("Success\ncode was " . $score . " bytes\n");
@@ -119,4 +116,4 @@ if($result != $io["output"])
 	error("Incorrect solution");
 
 // tell the user they got it right!
-success($_POST["user"], filesize($tmpdir . "/code.c"));
+success($username, filesize($tmpdir . "/code.c"));

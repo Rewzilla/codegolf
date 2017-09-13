@@ -1,8 +1,5 @@
 <?php
 
-// maybe be in maintenance mode
-include("maintenance.php");
-
 include("config.php");
 
 // connect to the DB

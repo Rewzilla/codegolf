@@ -11,4 +11,6 @@ $runner		= "/usr/local/bin/runner";
 $recaptcha_sitekey = "[CHANGEME]";
 $recaptcha_secret = "[CHANGEME]";
 
+//die("Down for maintenance. Be back soon! :)\n");
+
 ?>
