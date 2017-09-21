@@ -110,7 +110,7 @@ fclose($pipes[1]);
 fclose($pipes[2]);
 $retval = proc_close($run);
 
-if(strpos($err, "Bad system call") !== 0)
+if(strpos($err, "Bad system call") !== false)
 	error("No hax plz");
 
 // check if it got killed for hanging
