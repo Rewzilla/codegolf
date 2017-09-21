@@ -76,11 +76,12 @@ $tmpdir = $temp_dir . tempname();
 register_shutdown_function("cleanup");
 mkdir($tmpdir);
 move_uploaded_file($_FILES["code"]["tmp_name"], $tmpdir . "/code.c");
+file_put_contents($tmpdir . "/init.c", file_get_contents("seccomp.c"));
 
 // compile the code
 // ignore all warnings
 $compile = shell_exec(
-	"gcc -w -o " . $tmpdir . "/code " . $tmpdir . "/code.c 2>&1 " .
+	"gcc -w -o " . $tmpdir . "/code -lseccomp " . $tmpdir . "/init.c " . $tmpdir . "/code.c 2>&1 " .
 	"| grep -v '.o: In function'" .
 	"| grep -v 'function is dangerous and should not be used'"
 	);
