@@ -5,5 +5,5 @@ if(!defined("IN_MAIN"))
 
 ?>
 
-		<pre><code><?php include("golf.sh"); ?></code></pre>
+		<pre><code><?php echo htmlentities(file_get_contents("golf.sh")); ?></code></pre>
 		<a href="golf.sh">Download this script</a>

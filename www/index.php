@@ -26,16 +26,19 @@ if(!isset($_GET["page"]) || !in_array($_GET["page"], $valid_pages)) {
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 	<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+	<script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 
 <body>
 	<div class="container">
-		<h1>CodeGolf Leaderboard</h1>
+		<h1>CodeGolf</h1>
 		<a href="index.php?page=leaderboard">Leaderboard</a> | <a href="index.php?page=register">Account Registration</a> | <a href="index.php?page=challenge">Current Challenge</a> | <a href="index.php?page=script">Submission Script</a>
 		<hr/>
 		<?php
 		include($_GET["page"] . ".php");
 		?>
+		<hr/>
+		Sourcecode available on <a href="https://github.com/Rewzilla/codegolf/" target="_blank">github</a> (GPLv3).
 	</div>
 </body>
 
