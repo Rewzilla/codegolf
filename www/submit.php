@@ -4,7 +4,7 @@ include("config.php");
 
 // output an error message
 function error($msg) {
-	die("Error\n" . $msg . "\n");
+	die("Error: " . $msg . "\n");
 }
 
 // save the score (maybe)
@@ -15,7 +15,7 @@ function success($username, $score) {
 	$sql->bind_param("is", $score, $username);
 	$sql->execute();
 	$sql->close();
-	die("Success\ncode was " . $score . " bytes\n");
+	die("Success: code was " . $score . " bytes\n");
 }
 
 // check to see if $user:$pass is valid and return $user if so
@@ -105,8 +105,13 @@ if(!is_resource($run))
 fwrite($pipes[0], $io["input"]);
 fclose($pipes[0]);
 $result = stream_get_contents($pipes[1]);
+$err = stream_get_contents($pipes[2]);
 fclose($pipes[1]);
+fclose($pipes[2]);
 $retval = proc_close($run);
+
+if(strpos($err, "Bad system call") !== 0)
+	error("No hax plz");
 
 // check if it got killed for hanging
 if($retval == 137)
