@@ -11,6 +11,13 @@ $runner		= "/usr/local/bin/runner";
 $recaptcha_sitekey = "[CHANGEME]";
 $recaptcha_secret = "[CHANGEME]";
 
+$valid_pages = array(
+	"leaderboard",
+	"register",
+	"challenge",
+	"script",
+);
+
 //die("Down for maintenance. Be back soon! :)\n");
 
 ?>

@@ -1,11 +1,7 @@
 <?php
 
-include("config.php");
-
-// connect to the DB
-$db = new mysqli($mysql_host, $mysql_user, $mysql_pass, $mysql_db);
-if(!$db)
-	error("Database error");
+if(!defined("IN_MAIN"))
+	error("Invalid access");
 
 // check if a user already exists
 function user_exists($username) {
@@ -64,24 +60,6 @@ if(isset($_POST["submit"])) {
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<title>CodeGolf Registration</title>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-	<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
-	<script src='https://www.google.com/recaptcha/api.js'></script>
-</head>
-
-<body>
-	<div class="container">
-		<h1>Register</h1>
-		<a href="index.php">Leaderboard</a> | <a href="register.php">Account Registration</a> | <a href="challenge.txt" target="_blank">Current Challenge</a> | <a href="golf.sh" target="_blank">Submission Script</a>
-		<hr/>
 		<?php if(isset($_POST["submit"])) { ?>
 		<div class="alert alert-<?php echo $type; ?>" role="alert">
 			<?php echo $msg; ?>
@@ -106,7 +84,3 @@ if(isset($_POST["submit"])) {
 			<input type="hidden" name="submit" value="true">
 			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>
-	</div>
-</body>
-
-</html>
