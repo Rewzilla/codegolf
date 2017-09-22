@@ -11,7 +11,7 @@ if(!$db)
 
 if(!isset($_GET["page"]) || !in_array($_GET["page"], $valid_pages)) {
 	header("Location: /index.php?page=leaderboard");
-	error("Invalid page");
+	die("Error: Invalid page");
 }
 
 ?>
