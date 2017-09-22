@@ -23,6 +23,7 @@ void __attribute__((constructor)) init() {
 	seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(execve), 0);
 	seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(unlink), 0);
 	seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(kill), 0);
+	seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(socketcall), 0);
 
 	seccomp_load(ctx);
 
