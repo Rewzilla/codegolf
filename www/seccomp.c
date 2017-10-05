@@ -10,7 +10,7 @@ use them.  Filters will be added on an as-needed basis.
 #include <seccomp.h>
 #include <linux/seccomp.h>
 
-void __attribute__((constructor)) init() {
+void __attribute__((constructor(0))) init() {
 
 	scmp_filter_ctx ctx;
 
