@@ -117,6 +117,19 @@ if(strpos($err, "Bad system call") !== false)
 if($retval == 137)
 	error("Program hung");
 
+// maybe show debug info
+if($allow_debug && strpos(file_get_contents($tmpdir . "/code.c"), "DEBUGPLZ") !== false) {
+	echo "\n";
+	echo "Your program output...   \n";
+	echo "-------------------------\n";
+	echo $io["output"];
+	echo "\n";
+	echo "But I expected to see... \n";
+	echo "-------------------------\n";
+	echo $result;
+	echo "\n";
+}
+
 // check if the solution was wrong
 if($result != $io["output"])
 	error("Incorrect solution");

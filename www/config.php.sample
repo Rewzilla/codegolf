@@ -18,6 +18,8 @@ $valid_pages = array(
 	"script",
 );
 
+$allow_debug = false;
+
 //die("Down for maintenance. Be back soon! :)\n");
 
 ?>
