@@ -5,6 +5,9 @@ $mysql_user	= "[CHANGEME]";
 $mysql_pass	= "[CHANGEME]";
 $mysql_db	= "codegolf";
 
+$admin_user = "[CHANGEME]";
+$admin_pass = "[CHANGEME]";
+
 $temp_dir	= "/tmp/";
 $runner		= "/usr/local/bin/runner";
 
