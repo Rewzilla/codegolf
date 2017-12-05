@@ -25,8 +25,10 @@ if(isset($_POST["delete"])) {
 }
 
 if(isset($_POST["input"]) && isset($_POST["output"])) {
+	$input = str_replace("\r\n", "\n", $_POST["input"]);
+	$output = str_replace("\r\n", "\n", $_POST["output"]);
 	$sql = $db->prepare("INSERT INTO testcases (input, output) VALUES (?, ?)");
-	$sql->bind_param("ss", $_POST["input"], $_POST["output"]);
+	$sql->bind_param("ss", $input, $output);
 	$sql->execute();
 	$sql->close();
 }
@@ -63,11 +65,11 @@ $sql->bind_result($id, $input, $output);
 		<table class="table table-striped table-bordered">
 			<tr><th>Input</th><th>Output</th><th>Add/Delete</th></tr>
 			<?php while($sql->fetch()) { ?>
-				<tr><td><pre><?php echo $input; ?></pre></td><td><pre><?php echo $output; ?></pre></td><td><form method="POST"><button type="submit" class="btn btn-danger" name="delete" value="<?php echo $id; ?>">Delete</button></form></td></tr>
+				<tr><td><pre><?php echo $input; ?></pre></td><td><pre><?php echo $output; ?></pre></td><td style="text-align: center;"><form method="POST"><button type="submit" class="btn btn-danger" name="delete" value="<?php echo $id; ?>">Delete</button></form></td></tr>
 			<?php } ?>
 			<form method="POST">
 			<div class="form-group">
-				<tr><td><textarea class="form-control" rows="5" name="input"></textarea></td><td><textarea class="form-control" rows="5" name="output"></textarea></td><td><button type="submit" class="btn btn-primary">Add</button></td></tr>
+				<tr><td><textarea class="form-control" rows="5" name="input"></textarea></td><td><textarea class="form-control" rows="5" name="output"></textarea></td><td style="text-align: center;"><button type="submit" class="btn btn-primary">Add</button></td></tr>
 			</div>
 			</form>
 		</table>
