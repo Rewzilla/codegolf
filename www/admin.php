@@ -7,6 +7,8 @@ if(!isset($_SERVER["PHP_AUTH_USER"])) {
 	header("WWW-Authenticate: Basic realm=\"Please Login\"");
 	die("ERROR: Please refresh the page and login");
 } else if($_SERVER["PHP_AUTH_USER"] != $admin_user || md5($_SERVER["PHP_AUTH_PW"]) != $admin_pass) {
+	header("HTTP/1.0 401 Unauthorized");
+	header("WWW-Authenticate: Basic realm=\"Invalid, try again\"");
 	die("ERROR: Invalid password");
 }
 
@@ -59,13 +61,13 @@ $sql->bind_result($id, $input, $output);
 		<div class="alert alert-success" role="alert">Testcase added</div>
 		<?php } ?>
 		<table class="table table-striped table-bordered">
-			<tr><th>ID</th><th>Input</th><th>Output</th><th>Add/Delete</th></tr>
+			<tr><th>Input</th><th>Output</th><th>Add/Delete</th></tr>
 			<?php while($sql->fetch()) { ?>
-				<tr><td><?php echo $id; ?></td><td><pre><?php echo $input; ?></pre></td><td><pre><?php echo $output; ?></pre></td><td><form method="POST"><button type="submit" class="btn btn-danger" name="delete" value="<?php echo $id; ?>">Delete</button></form></td></tr>
+				<tr><td><pre><?php echo $input; ?></pre></td><td><pre><?php echo $output; ?></pre></td><td><form method="POST"><button type="submit" class="btn btn-danger" name="delete" value="<?php echo $id; ?>">Delete</button></form></td></tr>
 			<?php } ?>
 			<form method="POST">
 			<div class="form-group">
-				<tr><td>...</td><td><textarea class="form-control" rows="5" name="input"></textarea></td><td><textarea class="form-control" rows="5" name="output"></textarea></td><td><button type="submit" class="btn btn-primary">Add</button></td></tr>
+				<tr><td><textarea class="form-control" rows="5" name="input"></textarea></td><td><textarea class="form-control" rows="5" name="output"></textarea></td><td><button type="submit" class="btn btn-primary">Add</button></td></tr>
 			</div>
 			</form>
 		</table>
