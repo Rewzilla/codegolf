@@ -11,16 +11,16 @@ function error($msg) {
 // output a success message
 function success($username, $score) {
 	global $db;
-	$sql = $db->prepare("SELECT score FROM users WHERE username=?");
+	$sql = $db->prepare("SELECT MIN(score) FROM submissions WHERE username=?");
 	$sql->bind_param("s", $username);
 	$sql->execute();
 	$sql->bind_result($prev_score);
 	$sql->fetch();
 	$sql->close();
 
-	if ($score < $prev_score) {
-		$sql = $db->prepare("UPDATE users SET score=?, time=NOW() WHERE username=?");
-		$sql->bind_param("is", $score, $username);
+	if (is_null($prev_score) || $score < $prev_score) {
+		$sql = $db->prepare("INSERT INTO submissions VALUES (?,NOW(),?)");
+		$sql->bind_param("si", $username, $score);
 		$sql->execute();
 		$sql->close();
 	}
