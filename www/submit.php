@@ -11,8 +11,8 @@ function error($msg) {
 // output a success message
 function success($username, $score) {
 	global $db;
-        $sql = $db->prepare("SELECT score FROM users WHERE username=?");
-        $sql->bind_param("s", $username);
+	$sql = $db->prepare("SELECT score FROM users WHERE username=?");
+	$sql->bind_param("s", $username);
 	$sql->execute();
 	$sql->bind_result($prev_score);
 	$sql->fetch();
