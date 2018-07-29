@@ -1,5 +1,4 @@
 <?php
-mysqli_report(MYSQLI_REPORT_ALL);
 if(!defined("IN_MAIN"))
 	error("Invalid access");
 
@@ -74,9 +73,6 @@ $usernames = $res->fetch_all();
                 intersect: true
             },
             elements: {
-                point: {
-//                    radius: 0
-                },
                 line: {
                     tension: 0
                 }
@@ -89,10 +85,6 @@ $usernames = $res->fetch_all();
                         display: false,
                         labelString: ''
                     },
-                    ticks: {
-//                        display: false,
-//                        maxTicksLimit: 20,
-                    }
                 }],
                 yAxes: [{
                     display: true,
@@ -101,7 +93,6 @@ $usernames = $res->fetch_all();
                         labelString: 'Bytes'
                     },
                     ticks: {
-//                        stepSize: 1,
                         maxTicksLimit:20,
                         min:0,
                     }
