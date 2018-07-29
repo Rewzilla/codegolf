@@ -3,7 +3,7 @@
 if(!defined("IN_MAIN"))
 	error("Invalid access");
 
-$sql = $db->prepare("SELECT username, score FROM users ORDER BY score,username ASC");
+$sql = $db->prepare("SELECT username, score FROM users ORDER BY score,time,username ASC");
 $sql->execute();
 $sql->bind_result($username, $score);
 

@@ -11,10 +11,19 @@ function error($msg) {
 // output a success message
 function success($username, $score) {
 	global $db;
-	$sql = $db->prepare("UPDATE users SET score=LEAST(?, score) WHERE username=?");
-	$sql->bind_param("is", $score, $username);
+        $sql = $db->prepare("SELECT score FROM users WHERE username=?");
+        $sql->bind_param("s", $username);
 	$sql->execute();
+	$sql->bind_result($prev_score);
+	$sql->fetch();
 	$sql->close();
+
+	if ($score < $prev_score) {
+		$sql = $db->prepare("UPDATE users SET score=?, time=NOW() WHERE username=?");
+		$sql->bind_param("is", $score, $username);
+		$sql->execute();
+		$sql->close();
+	}
 	die("Success: code was " . $score . " bytes\n");
 }
 
