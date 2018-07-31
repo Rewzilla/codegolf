@@ -11,9 +11,6 @@ $usernames = $res->fetch_all();
 </div>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
 <script>
-    function randInt(max_val) {
-        return Math.floor(Math.random() * max_val);
-    }
     var config = {
         type: 'line',
         data: {
