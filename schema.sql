@@ -47,9 +47,8 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
-  `username` varchar(64) DEFAULT NULL,
+  `username` varchar(64) NOT NULL,
   `password` varchar(32) DEFAULT NULL,
-  `score` int(11) DEFAULT '9999',
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=144 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -61,6 +60,19 @@ CREATE TABLE `users` (
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+DROP TABLE IF EXISTS `submissions`;
+CREATE TABLE `submissions` (
+  `username` varchar(64) NOT NULL,
+  `time` datetime NOT NULL,
+  `score` int(11) NOT NULL,
+  FOREIGN KEY (`username`) REFERENCES users(`username`) ON DELETE CASCADE,
+  PRIMARY KEY `user_score` (`username`, `score`)
+);
+LOCK TABLES `submissions` WRITE;
+/*!40000 ALTER TABLE `submissions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `submissions` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
