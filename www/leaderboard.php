@@ -19,7 +19,8 @@ $place = 1;
 
 		<table class="table table-striped table-bordered">
 			<tr><th>Place</th><th>Username</th><th>Best submission (bytes)</th></tr>
-			<?php while($sql->fetch()) { ?>
+			<?php while($sql->fetch()) {
+				if($score == 9999) continue; ?>
 				<tr><td><?php echo $place++; ?></td><td><?php echo $username; ?></td><td><?php echo $score; ?></td></tr>
 			<?php } ?>
 		</table>

@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Save as:	golf.sh
+# Run:		chmod +x golf.sh
+# Run:		./golf.sh yourfile.c
+
 URL=[CHANGEME]/submit.php
 
 if [ $# -ne 1 ]; then
