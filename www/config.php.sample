@@ -16,6 +16,7 @@ $recaptcha_secret = "[CHANGEME]";
 
 $valid_pages = array(
 	"leaderboard",
+	"scores",
 	"register",
 	"challenge",
 	"script",

@@ -2,8 +2,10 @@
 if(!defined("IN_MAIN"))
 	error("Invalid access");
 
-$res = $db->query("SELECT username FROM submissions GROUP BY username ORDER BY username");
-$usernames = $res->fetch_all();
+$sql = $db->query("SELECT username FROM submissions WHERE score != 9999 GROUP BY username ORDER BY username");
+$users = array();
+while($user = $sql->fetch_assoc())
+	$users[] = $user;
 ?>
 
 <div style="width:75%;margin: auto">
@@ -15,8 +17,8 @@ $usernames = $res->fetch_all();
         type: 'line',
         data: {
             datasets: [
-            <?php foreach ($usernames as $username) {
-                $username = $username[0];
+            <?php foreach ($users as $user) {
+                $username = str_replace("'", "\\'", $user["username"]);
             ?>
             {
                 label: '<?php echo $username; ?>',
