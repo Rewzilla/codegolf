@@ -13,7 +13,7 @@ $sql = $db->prepare("SELECT s1.username, s1.score, s1.hash, s1.time FROM submiss
 		"ORDER BY score,time,username");
 */
 $sql = $db->prepare(
-	"SELECT * FROM submissions " .
+	"SELECT username, score, hash, time FROM submissions " .
 	"WHERE time IN (" .
 		"SELECT MAX(time) " .
 		"FROM submissions " .
