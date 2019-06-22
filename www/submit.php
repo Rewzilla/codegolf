@@ -144,4 +144,10 @@ if($result != $io["output"])
 	error("Incorrect solution");
 
 // tell the user they got it right!
-success($username, filesize($tmpdir . "/code.c"), md5(file_get_contents($tmpdir . "/code.c")));
+$code = file_get_contents($tmpdir . "/code.c");
+$code = preg_replace("/[a-zA-Z]/", "X", $code);
+$code = preg_replace(array("/X\+\+/", "/\+\+X/"), "INC", $code);
+$code = preg_replace(array("/X\-\-/", "/\-\-X/"), "DEC", $code);
+$hash = md5($code);
+$size = filesize($tmpdir . "/code.c");
+success($username, $size, $hash);
