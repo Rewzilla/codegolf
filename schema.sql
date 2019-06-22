@@ -67,8 +67,9 @@ CREATE TABLE `submissions` (
   `username` varchar(64) NOT NULL,
   `time` datetime NOT NULL,
   `score` int(11) NOT NULL,
+  `hash` varchar(32) NOT NULL,
   FOREIGN KEY (`username`) REFERENCES users(`username`) ON DELETE CASCADE,
-  PRIMARY KEY `user_score` (`username`, `score`)
+  PRIMARY KEY `user_score_hash` (`username`, `score`, `hash`)
 );
 LOCK TABLES `submissions` WRITE;
 /*!40000 ALTER TABLE `submissions` DISABLE KEYS */;

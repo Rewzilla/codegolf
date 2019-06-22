@@ -9,22 +9,22 @@ function error($msg) {
 
 // save the score (maybe)
 // output a success message
-function success($username, $score) {
+function success($username, $score, $hash) {
 	global $db;
-	$sql = $db->prepare("SELECT MIN(score) FROM submissions WHERE username=?");
+	$sql = $db->prepare("SELECT MIN(score), hash FROM submissions WHERE username=?");
 	$sql->bind_param("s", $username);
 	$sql->execute();
-	$sql->bind_result($prev_score);
+	$sql->bind_result($prev_score, $prev_hash);
 	$sql->fetch();
 	$sql->close();
 
-	if (is_null($prev_score) || $score < $prev_score) {
-		$sql = $db->prepare("INSERT INTO submissions VALUES (?,NOW(),?)");
-		$sql->bind_param("si", $username, $score);
+	if (is_null($prev_score) || $score < $prev_score || $hash != $prev_hash) {
+		$sql = $db->prepare("INSERT INTO submissions (username, time, score, hash) VALUES (?,NOW(),?,?)");
+		$sql->bind_param("sis", $username, $score, $hash);
 		$sql->execute();
 		$sql->close();
 	}
-	die("Success: code was " . $score . " bytes\n");
+	die("Success: code was " . $score . " bytes, hash was " . $hash . "\n");
 }
 
 // check to see if $user:$pass is valid and return $user if so
@@ -144,4 +144,4 @@ if($result != $io["output"])
 	error("Incorrect solution");
 
 // tell the user they got it right!
-success($username, filesize($tmpdir . "/code.c"));
+success($username, filesize($tmpdir . "/code.c"), md5(file_get_contents($tmpdir . "/code.c")));
