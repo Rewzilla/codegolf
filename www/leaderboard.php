@@ -13,7 +13,7 @@ $sql = $db->prepare(
 	"ORDER BY score, time, username;"
 );
 $sql->execute();
-$sql->bind_result($username, $score, $hash, $time);
+$sql->bind_result($username, $score, $time);
 
 $place = 1;
 

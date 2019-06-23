@@ -131,11 +131,11 @@ if($allow_debug && strpos(file_get_contents($tmpdir . "/code.c"), "DEBUGPLZ") !=
 	echo "\n";
 	echo "Your program output...   \n";
 	echo "-------------------------\n";
-	echo $io["output"];
+	echo $result;
 	echo "\n";
 	echo "But I expected to see... \n";
 	echo "-------------------------\n";
-	echo $result;
+	echo $io["output"];
 	echo "\n";
 }
 
