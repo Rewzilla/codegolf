@@ -24,6 +24,8 @@ $valid_pages = array(
 
 $allow_debug = false;
 
+$num_tests = 10;
+
 //die("Down for maintenance. Be back soon! :)\n");
 
 ?>

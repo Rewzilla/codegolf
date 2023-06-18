@@ -90,7 +90,7 @@ file_put_contents($tmpdir . "/init.c", file_get_contents("seccomp.c"));
 // compile the code
 // ignore all warnings
 $compile = shell_exec(
-	"gcc -w -o " . $tmpdir . "/code -lseccomp " . $tmpdir . "/init.c " . $tmpdir . "/code.c 2>&1 " .
+	"gcc -w -o " . $tmpdir . "/code " . $tmpdir . "/init.c " . $tmpdir . "/code.c -lseccomp 2>&1 " .
 	"| grep -v '.o: In function'" .
 	"| grep -v 'function is dangerous and should not be used'"
 	);
@@ -98,50 +98,54 @@ $compile = str_replace($tmpdir, "/path/to", $compile);
 if(!empty($compile))
 	error($compile);
 
-// run the code
-$io = get_testcase();
-$descspec = array(
-	0 => array("pipe", "r"),
-	1 => array("pipe", "w"),
-	2 => array("pipe", "w"),
-);
-$run = proc_open($runner, $descspec, $pipes, $tmpdir);
-if(!is_resource($run))
-	error("Failed to run program");
+for ($i=0; $i<$num_tests; $i++) {
 
-// write the input to the program's stdin
-// retreive the program's stdout and return value
-fwrite($pipes[0], $io["input"]);
-fclose($pipes[0]);
-$result = stream_get_contents($pipes[1]);
-$err = stream_get_contents($pipes[2]);
-fclose($pipes[1]);
-fclose($pipes[2]);
-$retval = proc_close($run);
+	// run the code
+	$io = get_testcase();
+	$descspec = array(
+		0 => array("pipe", "r"),
+		1 => array("pipe", "w"),
+		2 => array("pipe", "w"),
+	);
+	$run = proc_open($runner, $descspec, $pipes, $tmpdir);
+	if(!is_resource($run))
+		error("Failed to run program");
 
-if(strpos($err, "Bad system call") !== false)
-	error("No hax plz");
+	// write the input to the program's stdin
+	// retreive the program's stdout and return value
+	fwrite($pipes[0], $io["input"]);
+	fclose($pipes[0]);
+	$result = stream_get_contents($pipes[1]);
+	$err = stream_get_contents($pipes[2]);
+	fclose($pipes[1]);
+	fclose($pipes[2]);
+	$retval = proc_close($run);
 
-// check if it got killed for hanging
-if($retval == 137)
-	error("Program hung");
+	if(strpos($err, "Bad system call") !== false)
+		error("No hax plz");
 
-// maybe show debug info
-if($allow_debug && strpos(file_get_contents($tmpdir . "/code.c"), "DEBUGPLZ") !== false) {
-	echo "\n";
-	echo "Your program output...   \n";
-	echo "-------------------------\n";
-	echo $result;
-	echo "\n";
-	echo "But I expected to see... \n";
-	echo "-------------------------\n";
-	echo $io["output"];
-	echo "\n";
+	// check if it got killed for hanging
+	if($retval == 137)
+		error("Program hung");
+
+	// maybe show debug info
+	if($allow_debug && strpos(file_get_contents($tmpdir . "/code.c"), "DEBUGPLZ") !== false) {
+		echo "\n";
+		echo "Your program output...   \n";
+		echo "-------------------------\n";
+		echo $result;
+		echo "\n";
+		echo "But I expected to see... \n";
+		echo "-------------------------\n";
+		echo $io["output"];
+		echo "\n";
+	}
+
+	// check if the solution was wrong
+	if($result != $io["output"])
+		error("Incorrect solution");
+
 }
-
-// check if the solution was wrong
-if($result != $io["output"])
-	error("Incorrect solution");
 
 // tell the user they got it right!
 $size = filesize($tmpdir . "/code.c");

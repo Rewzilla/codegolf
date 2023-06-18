@@ -69,7 +69,7 @@ CREATE TABLE `submissions` (
   `score` int(11) NOT NULL,
   FOREIGN KEY (`username`) REFERENCES users(`username`) ON DELETE CASCADE,
   PRIMARY KEY `user_score` (`username`, `score`)
-);
+) ENGINE=InnoDB AUTO_INCREMENT=144 DEFAULT CHARSET=latin1;
 LOCK TABLES `submissions` WRITE;
 /*!40000 ALTER TABLE `submissions` DISABLE KEYS */;
 /*!40000 ALTER TABLE `submissions` ENABLE KEYS */;
